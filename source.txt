@@ -1,0 +1,15 @@
+--create the nos 1 to 100 using sc and  parallelize method
+val dataCreate = sc.parallelize(1 to 100)
+
+--create Data frame form rdd
+val dataDf = dataCreate.toDF()
+
+
+-- write data into the parquet file
+dataDf.write.parquet("dataFile.parquet")
+
+--read the parquet file
+val readFile = sqlContext.read.parquet("dataFile.parquet")
+
+--show the read file
+readFile.show()
